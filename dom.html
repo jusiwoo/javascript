@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+    <button class="btn1">버튼1</button>
+    <button class="btn2">버튼2</button>
+    <script>
+        // let btn = $('button.btn1');
+        // btn.click(function(){
+        //     console.log($(this).index());
+        // });
+
+        let btn1 = $('button.btn1');
+        btn1.click(function(){
+            let name = prompt('이름?');
+            console.log(`${name}님 환영합니다.`);
+        });
+
+        let btn2 = $('button.btn2');
+        btn2.click(function(){
+            let num = prompt('숫자?');
+            if(num%2===0){
+                alert('짝수');
+            }else{
+                alert('홀수');
+            }
+        });
+    </script>
+</body>
+</html>

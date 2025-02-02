@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oddeven.html</title>
+    <script src="./jquery.js"></script>
+</head>
+<body>
+    <h1>홀짝 맞추기 게임</h1>
+    <button>홀수</button>
+    <button>짝수</button>
+    <h3>메세지</h3>
+    <button style="display: none;">재도전</button>
+    <script>
+        let num = parseInt(Math.random()*10)+1;
+        let oddeven = '';
+        const getNum = function(randomNum){
+            if(randomNum%2 === 0){
+                oddeven='짝수';
+            }else{
+                oddeven='홀수';
+            }
+        }
+        getNum(num);
+    </script>
+</body>
+</html>

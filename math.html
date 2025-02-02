@@ -9,10 +9,10 @@
 <body>
     <h1>랜덤 숫자 맞추기</h1>
     <button class="start">시작</button>
-    <input type="number" disabled>
-    <button class="check">check</button>
+    <input type="number" disabled value="0">
+    <button class="check" disabled>check</button>
     <h3>❤️ X <span>10</span></h3>
-    <h4>여기에 메세지가 들어와요!</h4>
+    <h4></h4>
     <script>
         // let btnA = $('button:nth-of-type(1)');
         // btnA.click(function(){
@@ -26,27 +26,44 @@
         // Math.random()은 무조건 *숫자 개수로 생각하면 된다.
         // console.log(Math.round(Math.random()*55)+1);
 
-        let randomNum = 0;
+        let [randomNum,life] = [0,10];
 
         $('button.start').click(function(){
             $('input').attr('disabled',false);
+            $('input').val(0);
             randomNum = parseInt(Math.random()*100)+1;
             console.log(randomNum);
             $(this).attr('disabled',true);
+            $('button.check').attr('disabled',false);
+            life = 10;
+            $('span').text(life);
+            $('h4').text('');
         });
 
         $('button.check').click(function(){
             let userNum = $('input').val()*1;
-            let hp = $('span').context;
-            console.log(hp)
             if(randomNum===userNum){
-                $('h4').html('<mark>성공<mark>!!')
+                $('h4').text('성공!!');
+                $('button.start').attr('disabled',false);
+                $('input').attr('disabled',true);
+                $(this).attr('disabled',true);
+                $('button.start').text('재도전');
             }else if(userNum>100 || userNum<1){
-                $('h4').text('1~100 사이의 숫자')
+                $('h4').text('1~100 사이의 숫자');
             }else if(randomNum>userNum){
-                $('h4').text('업')
+                $('h4').text('업');
+                life--;
             }else if(randomNum<userNum){
-                $('h4').text('다운')
+                $('h4').text('다운');
+                life--;
+            }
+            $('span').text(life);
+            if(life===0){ 
+                $('h4').text(`실패@@, 숫자는 ${randomNum}`);
+                $('button.start').attr('disabled',false);
+                $('input').attr('disabled',true);
+                $(this).attr('disabled',true);
+                $('button.start').text('재도전');
             }
         });
     </script>

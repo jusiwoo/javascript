@@ -15,10 +15,31 @@
         // const h2Clone = h2.clone();
         const wrap = $('.wrap');
 
-        for(let i=1; i<=10; i++){
-            const h2Clone = h2.clone();
+        let obj = [
+            {
+                name:'name',
+                id:'id'
+            },
+            {
+                name:'name',
+                id:'id'
+            },
+            {
+                name:'name',
+                id:'id'
+            },
+        ];
+
+        obj.forEach(function(e){
+            let h2Clone = h2.clone();
+            h2Clone.text(e.id);
             wrap.append(h2Clone);
-        }
+        })
+
+        // for(let i=1; i<=10; i++){
+        //     const h2Clone = h2.clone();
+        //     wrap.append(h2Clone);
+        // }
     </script>
 </body>
 </html>

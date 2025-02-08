@@ -152,22 +152,59 @@
         {question: '콘솔에 출력하는 함수는?', answer: 'console.log'}
       ];
 
-        const que = $('.question-item');
+        let que = $('.question-item');
         const list = $('.quiz-list');
         const ans = $('.answer-item');
+        let submit = $('.submit-btn');
+        const hint = $('.hint');
 
         que.click(function(){
-            $(this).toggleClass('active');
+            if(!$(this).hasClass('disabled')){
+                $(this).toggleClass('active');
+            }
         });
-    
+
+        // 제출버튼 클릭
+        submit.click(function(){
+            let nowVal = $(this).prev().val();
+            let ind = $(this).parent().attr('num-data');
+            let ans = quiz[ind].answer;
+
+            if(nowVal === ans){
+                $(this).text('⭕');
+                $(this).parent().next().removeClass('disabled');
+                que.removeClass('active');
+                $(this).parent().next().addClass('active');
+            }else{
+                $(this).text('❌');
+            }
+        });
+
+        hint.click(function(){
+           let ind = $(this).parent().attr('num-data');
+           let ans = quiz[ind].answer;
+           let inp = $(this).prevAll('.answer-input');
+           inp.attr('placeholder',ans);
+        });
+        
         quiz.forEach(function(e,i){
             let qu = que.clone(true);
             let an = ans.clone(true);
-            qu.text(`Q${i}. ${e.question}`);
+            qu.text(`Q${i+1}. ${e.question}`);
+            qu.addClass('disabled');
+            an.attr('num-data',i);
             list.append(qu);
             list.append(an);
         });
+        
+        que.remove();
+        ans.remove();
+        
+        que = $('.question-item');
+        que.first().removeClass('disabled');
+        
 
+        
     </script>
   </body>
 </html>

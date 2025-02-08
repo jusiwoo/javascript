@@ -9,9 +9,11 @@
 <body>
     <div class="wrap">
         <h2>이 태그를 복제해봐요!</h2>
+        <h3>이 태그를 복제해봐요!</h3>
     </div>
     <script>
-        const h2 = $('h2');
+        let h2 = $('h2');
+        const h3 = $('h3');
         // const h2Clone = h2.clone();
         const wrap = $('.wrap');
 
@@ -32,9 +34,17 @@
 
         obj.forEach(function(e){
             let h2Clone = h2.clone();
+            let h3Clone = h3.clone();
             h2Clone.text(e.id);
+            h3Clone.text(e.name);
             wrap.append(h2Clone);
-        })
+            wrap.append(h3Clone);
+        });
+
+        console.log($('h2'))
+
+        h2.remove();
+        h3.remove();
 
         // for(let i=1; i<=10; i++){
         //     const h2Clone = h2.clone();

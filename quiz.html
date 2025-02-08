@@ -153,8 +153,19 @@
       ];
 
         const que = $('.question-item');
+        const list = $('.quiz-list');
+        const ans = $('.answer-item');
+
         que.click(function(){
-            $(this).addClass('active');
+            $(this).toggleClass('active');
+        });
+    
+        quiz.forEach(function(e,i){
+            let qu = que.clone(true);
+            let an = ans.clone(true);
+            qu.text(`Q${i}. ${e.question}`);
+            list.append(qu);
+            list.append(an);
         });
 
     </script>

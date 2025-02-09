@@ -41,6 +41,9 @@
         div.slide.s6{
             background-color: navy;
         }
+        div.slide.s7{
+            background-color: purple;
+        }
         div.btns{
             width: 100%;
             position: absolute;
@@ -72,6 +75,7 @@
         <div class="slide s4"></div>
         <div class="slide s5"></div>
         <div class="slide s6"></div>
+        <div class="slide s7"></div>
         <div class="btns">
             <button class="prev">◀️</button>
             <button class="next">▶️</button>
@@ -100,8 +104,7 @@
                     }else{
                         idx++;
                     }
-                    slides.removeClass('active');
-                    slides.eq(idx).addClass('active');
+                    slides.removeClass('active').eq(idx).addClass('active');
                 }
             });
         </script>

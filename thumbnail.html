@@ -14,6 +14,22 @@
             width: 100%;
             height: 500px;
             background-color: #ccc;
+            /* 배경사진 위해 필요한것 */
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+        div.btn{
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            margin: auto;
+            width: 100%;
+            height: 40px;
+            top: 0;
+            bottom: 0;
+            cursor: pointer;
         }
         ul{
             display: flex;
@@ -46,11 +62,19 @@
         li.i5{
             background-image: url(./images/slide05.jpg);
         }
+        .active{
+            border: 1.5px solid red;
+        }
     </style>
 </head>
 <body>
     <div class="wrap">
-        <div class="mainImg"></div>
+        <div class="mainImg">
+            <div class="btn">
+                <div class="prev">◀️</div>
+                <div class="next">▶️</div>
+            </div>
+        </div>
         <ul>
             <li class="i1"></li>
             <li class="i2"></li>
@@ -61,14 +85,34 @@
     </div>
     <script>
         let li = $('li');
-        let mainImg = $('.mainImg')
+        let mainImg = $('.mainImg');
+        let btn = $('.btn');
+        let idx = 0;
 
         li.click(function(){
             mainImg.css('background-image',$(this).css('background-image'));
-        })
+            li.removeClass('active');
+            $(this).addClass('active');
+        });
 
-        // 이미지 경로 불러옴
-        console.log(li.eq(0).css('background-image'));
+        btn.click(function(){
+            let prev = $(this).hasClass('.prev');
+            li.removeClass('active');
+            if(prev){
+                idx--;
+                mainImg.css('background-image',li.eq(idx).css('background-image'));
+                li.eq(idx).addClass('active');
+            }else{
+                idx++;
+                mainImg.css('background-image',li.eq(idx).css('background-image'));
+                li.eq(idx).addClass('active');
+            }
+        });
+        console.log(idx)
+
+        // 이미지 경로 불러옴 : li.eq(0).css('background-image')
+        mainImg.css('background-image',li.eq(0).css('background-image'));
+        li.eq(0).addClass('active');
     </script>
 </body>
 </html>

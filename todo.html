@@ -111,7 +111,7 @@
 
         // 할 일 추가
         btnAdd.click(function(){
-            let todoItem = $('.todo-item').first().clone();
+            let todoItem = $('.todo-item').first().clone(true);
             let inp = $(this).prev().val();
             todoList.prepend(todoItem);
 

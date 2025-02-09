@@ -81,6 +81,7 @@
         }
 
     </style>
+    <script src="./jquery.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -103,5 +104,24 @@
         </ul>
     </div>
 
+    <script>
+        const btnAdd = $('.add-btn');
+        const todoList = $('.todo-list');
+        const del = $('.delete-btn');
+
+        // 할 일 추가
+        btnAdd.click(function(){
+            let todoItem = $('.todo-item').first().clone();
+            let inp = $(this).prev().val();
+            todoList.prepend(todoItem);
+
+            todoItem.children('.todo-text').text(inp);
+        });
+
+        // 할 일 삭제
+        del.click(function(){
+            $(this).parent().remove();
+        });
+    </script>
 </body>
 </html>

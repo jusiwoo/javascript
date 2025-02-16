@@ -148,28 +148,34 @@
             card.append(art2);
         });
 
+        art.remove();
+
+        // 무한루프 세팅
+        art = $('article');
+        card.prepend(art.last());
+        card.css('marginLeft','-100%');
+
         like = $('.like');
 
-        art.remove();
         card.css('width',`${news.length * 100}%`);
         pg.children('span').last().text(news.length);
 
-        function slide(left){
-            if(left){
-                if(ind > 0){
-                    ind--;
-                }
-                // 왼쪽
-            }else{
-                if(ind<news.length - 1){
-                    ind++;
-                }
+        // function slide(left){
+        //     if(left){
+        //         if(ind > 0){
+        //             ind--;
+        //         }
+        //         // 왼쪽
+        //     }else{
+        //         if(ind<news.length - 1){
+        //             ind++;
+        //         }
 
-                // 오른쪽
-            }
-            card.stop().animate({marginLeft : `${ind * -100}%`},500);
-            pg.children('span').first().text(ind+1);
-        }
+        //         // 오른쪽
+        //     }
+        //     card.stop().animate({marginLeft : `${ind * -100}%`},500);
+        //     pg.children('span').first().text(ind+1);
+        // }
 
         like.click(function(){  
             $(this).toggleClass('show');
@@ -183,16 +189,34 @@
         
         btns.click(function(){
             let left = $(this).hasClass('prev');
-            slide(left);
+            art = $('article');
+            let idx = $(this).parent().prev().children()
+            idx.forEach(function(e,i){
+                console.log(i)
+            })
+            // slide(left);
+            if(left){
+                card.stop().animate({marginLeft:0},500,function(){
+                    card.prepend(art.last());
+                    card.css('marginLeft','-100%');
+
+                });
+            }else{
+                card.stop().animate({marginLeft:'-200%'},500,function(){
+                    card.append(art.first());
+                    card.css('marginLeft','-100%');
+                    pg.children('span').first().text($(this).index());
+                });
+            }
         });
 
       
 
         contianer.on('swipeleft',function(){
-            slide(false);
+            // slide(false);
         });
         contianer.on('swiperight',function(){
-            slide(true);
+            // slide(true);
         });
 
     </script>

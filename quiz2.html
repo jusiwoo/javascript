@@ -178,11 +178,18 @@
         btn.addEventListener('click',function(){
           let inpAns = this.previousElementSibling.value;
           let reAns = this.previousElementSibling.getAttribute('data-ans');
+          let grandpa = this.parentNode.parentNode.nextElementSibling;
+          let nextTitle = grandpa.querySelector('.question-item');
+          let pf = this.parentNode.previousElementSibling;
 
           if(inpAns===reAns){
             this.innerText = '⭕'
+            nextTitle.className += ' active';
+            nextTitle.classList.remove('disabled');
+            pf.classList.remove('active');
           }else{
             this.innerText = '❌'
+            this.className += ' err'
           }
         });
       });

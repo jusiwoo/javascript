@@ -96,9 +96,10 @@
         });
 
         btn.click(function(){
-            let prev = $(this).hasClass('.prev');
+            let prev = $(this).hasClass('prev');
             li.removeClass('active');
             if(prev){
+                alert('d')
                 idx--;
                 mainImg.css('background-image',li.eq(idx).css('background-image'));
                 li.eq(idx).addClass('active');

@@ -140,12 +140,12 @@
             { title: "휴머노이드 로봇의 상용화", detail: "최근 휴머노이드 로봇이 다양한 산업 분야에서 도입되면서 상용화가 가속화되고 있습니다. 제조업과 서비스업에서 인간을 보조하는 역할을 하고 있으며, AI와 결합하여 더욱 정교한 작업을 수행할 수 있게 되었습니다. 하지만, 로봇이 인간의 일자리를 대체할 가능성에 대한 우려도 커지고 있으며, 이에 대한 사회적 논의가 필요합니다.", img: "./images/slide10.jpg" }
         ];
         like.click(function(){  
-            if(like.hasClass('show')){
-                like.removeClass('show');
-                like.text('☆')
+            $(this).toggleClass('show');
+            let show = $(this).hasClass('show');
+            if(show){
+                $(this).text('★');
             }else{
-                like.addClass('show');
-                like.text('★');
+                $(this).text('☆');
             }
         });
         

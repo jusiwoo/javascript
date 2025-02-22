@@ -111,8 +111,14 @@
         let com = ['가위','바위','보'];
         let ch = parseInt(Math.random()*3);
         let mn = document.querySelector('#computer-image');
-        let btns = document.querySelectorAll('.buttons');
+        let btns = document.querySelectorAll('button');
+        let result = document.querySelector('.result');
+        let cscore = document.querySelector('#computer-score');
+        let pscore = document.querySelector('#player-score');
         let cnt = 0;
+        let ps = 0;
+        let cs = 0;
+        let flag = false;
 
         let imgs = setInterval(function(){
             cnt %= 3;
@@ -120,12 +126,41 @@
             cnt++;
         },100);
 
+        function newGame(){
+            ch = parseInt(Math.random()*3);
+            cnt = 0;
+            imgs = setInterval(function(){
+                cnt %= 3;
+                mn.setAttribute('src', `./${com[cnt]}.png`);
+                cnt++;
+            },100);
+        }
+
         btns.forEach(function(e){
             e.addEventListener('click',function(){
-                console.log(this.id);
                 if(this.id != 'refresh'){
                     clearInterval(imgs);
                     mn.setAttribute('src', `./${com[ch]}.png`);
+
+                    let me = this.innerText;
+                    
+                    if(!flag){
+                        if(me === com[ch]){
+                            result.innerText = '비김';
+                        }else if(com[ch] ==='바위' && me ==='보' || com[ch] ==='보' && me ==='가위' || com[ch] ==='가위' && me ==='바위'){
+                            result.innerText = '이김';
+                            pscore.innerText = `${++ps}`;
+                        }else{
+                            result.innerText = '짐';
+                            cscore.innerText = `${++cs}`;
+                        }
+                        flag = true;
+                    }
+                }else{
+                    clearInterval(imgs);
+                    newGame()
+                    result.innerText = '';
+                    flag=false;
                 }
             });
         });

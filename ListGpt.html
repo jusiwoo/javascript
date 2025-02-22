@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+
+        .container {
+            height: 500px;
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            overflow-y: scroll;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #fff;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ddd;
+        }
+
+        .itm input{
+            width: 150px;
+            background-color: #fff;
+        }
+        
+        .itm input:disabled{
+            border: none;
+            background-color: transparent;
+        }
+
+        .edit, .delete {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+
+        .edit {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .edit:hover {
+            background-color: #e0a800;
+        }
+
+        .delete:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>To-Do List</h2>
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="할 일을 입력하세요">
+            <button id="addTask">추가</button>
+        </div>
+        <ul id="taskList">
+            <li class="itm">
+                <input type="text" value="샘플 할 일" disabled class="span"></span>
+                <div>
+                    <button class="edit">수정</button>
+                    <button class="delete">삭제</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        let add = document.querySelector('#addTask');
+        let inp = document.querySelector('#taskInput');
+        let itm = document.querySelector('.itm');
+        let todoList = document.querySelector('#taskList');
+
+        let modOrdel=function(state, dom, self){
+            if(state ==='del'){
+                dom.remove();
+            }else{
+                let st = self.innerText;
+                if(st === '확인'){
+                    dom.disabled=true;
+                    self.innerText = '수정';
+                }else{
+                    dom.disabled=false;
+                    self.innerText = '확인'
+                }
+            }
+        }
+        
+        add.addEventListener('click',function(){
+            let val = inp.value;
+            let newItem = itm.cloneNode(true);
+            let text = newItem.querySelector('.span');
+            
+            if(val===''){
+                alert('할 일을 작성해 주세요.')
+            }else{     
+                text.value = val;
+                todoList.prepend(newItem);
+                inp.value = '';
+
+                let mod = newItem.querySelector('.edit');
+                let del = newItem.querySelector('.delete');
+
+                mod.addEventListener('click',function(){
+                    modOrdel('mod',text, this);
+                    
+                    
+                });
+                del.addEventListener('click',function(){
+                    modOrdel('del',newItem);
+                });
+            }
+        });
+
+        itm.remove();
+        
+    </script>
+</body>
+</html>

@@ -156,7 +156,7 @@
                 let res = e.innerText.replace(vl, `<span>${vl}</span>`)
                 
                 let trim = e.innerText.replaceAll(' ','')
-                if(trim.includes(vl)){
+                if(trim.includes(vl) && !(vl==='')){
                     e.className += ' active';
                     e.innerHTML = res;
                 }else{
